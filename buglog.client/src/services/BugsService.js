@@ -21,6 +21,7 @@ class BugsService {
   async createBug(bugData) {
     const res = await api.post('api/bugs', bugData)
     AppState.allBugs = [res.data, ...AppState.allBugs]
+    return res.data.id
   }
 }
 export const bugsService = new BugsService()

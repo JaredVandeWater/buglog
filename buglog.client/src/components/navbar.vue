@@ -67,9 +67,11 @@ import { computed, reactive } from 'vue'
 import { bugsService } from '../services/BugsService'
 import Notification from '../utils/Notification'
 import $ from 'jquery'
+import { useRouter } from 'vue-router'
 export default {
   name: 'Navbar',
   setup() {
+    const router = useRouter()
     const state = reactive({
       newBug: {}
     })
@@ -84,9 +86,10 @@ export default {
       },
       async createNewBug() {
         try {
-          await bugsService.createBug(state.newBug)
+          const res = await bugsService.createBug(state.newBug)
           state.newBug = {}
           $('#bugCreator').modal('hide')
+          router.push(`/bug/${res}`)
         } catch (error) {
           Notification.toast(error, 'error')
         }
