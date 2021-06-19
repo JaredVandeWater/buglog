@@ -5,16 +5,16 @@
 </template>
 
 <script>
-import { computed, reactive, watchEffect } from '@vue/runtime-core'
+import { computed, onMounted, reactive } from '@vue/runtime-core'
 import Notification from '../utils/Notification'
 import { AppState } from '../AppState'
 import { bugsService } from '../services/BugsService'
 export default {
   name: 'Bugs',
   setup() {
-    watchEffect(async() => {
+    onMounted(() => {
       try {
-        await bugsService.getAllBugs()
+        bugsService.getAllBugs()
       } catch (error) {
         Notification.toast(error.message)
       }

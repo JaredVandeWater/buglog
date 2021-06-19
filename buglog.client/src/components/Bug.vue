@@ -17,6 +17,7 @@
 
 <script>
 import { useRouter } from 'vue-router'
+import Notification from '../utils/Notification'
 export default {
   props: {
     bug: { type: Object, required: true }
@@ -25,7 +26,11 @@ export default {
     const router = useRouter()
     return {
       async openBug() {
-        await router.push(`/bug/${props.bug.id}`)
+        try {
+          await router.push(`/bug/${props.bug.id}`)
+        } catch (error) {
+          Notification.toast(error, 'error')
+        }
       }
     }
   }

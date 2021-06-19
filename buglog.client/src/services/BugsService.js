@@ -5,7 +5,7 @@ import { api } from './AxiosService'
 class BugsService {
   async getAllBugs() {
     const res = await api.get('api/bugs')
-    AppState.allBugs = res.data
+    AppState.allBugs = res.data.reverse()
   }
 
   async getActiveBug(id) {
@@ -16,6 +16,11 @@ class BugsService {
   async getNotes(id) {
     const res = await api.get(`api/bugs/${id}/notes`)
     AppState.currentNotes = res.data
+  }
+
+  async createBug(bugData) {
+    const res = await api.post('api/bugs', bugData)
+    AppState.allBugs = [res.data, ...AppState.allBugs]
   }
 }
 export const bugsService = new BugsService()

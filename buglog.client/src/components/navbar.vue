@@ -9,14 +9,20 @@
         />
       </div>
     </router-link>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" title="Report a Bug">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bugCreator" title="Report a Bug">
       Report Bug
+    </button>
+    <button v-if="!user.isAuthenticated" @click="login" title="Sign Out" class="myButton2 m-4 pos-ab">
+      Sign In
+    </button>
+    <button v-if="user.isAuthenticated" @click="logout" title="Sign Out" class="myButton2 m-4 pos-ab">
+      Sign Out
     </button>
   </nav>
 
   <!-- Modal -->
   <div class="modal fade"
-       id="exampleModalCenter"
+       id="bugCreator"
        tabindex="-1"
        role="dialog"
        aria-labelledby="exampleModalCenterTitle"
@@ -25,12 +31,12 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">
+          <h5 class="modal-title" id="bugCreator">
             <strong>Report New Bug</strong>
           </h5>
         </div>
-        <div class="modal-body">
-          <form @submit.prevent="createNewBug">
+        <form @submit.prevent="createNewBug">
+          <div class="modal-body">
             <div class="d-flex flex-column">
               <label for="title">Title</label>
               <input v-model="state.newBug.title" type="text">
@@ -39,16 +45,16 @@
               <label for="Description">Description</label>
               <textarea v-model="state.newBug.description" rows="10"></textarea>
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
-          <button type="button" class="btn btn-primary">
-            Save changes
-          </button>
-        </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Save changes
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -58,6 +64,9 @@
 import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
+import { bugsService } from '../services/BugsService'
+import Notification from '../utils/Notification'
+import $ from 'jquery'
 export default {
   name: 'Navbar',
   setup() {
@@ -72,6 +81,15 @@ export default {
       },
       async logout() {
         AuthService.logout({ returnTo: window.location.origin })
+      },
+      async createNewBug() {
+        try {
+          await bugsService.createBug(state.newBug)
+          state.newBug = {}
+          $('#bugCreator').modal('hide')
+        } catch (error) {
+          Notification.toast(error, 'error')
+        }
       }
     }
   }

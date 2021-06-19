@@ -8,7 +8,7 @@ class BugsService {
   }
 
   async getOneBug(id) {
-    const bug = await dbContext.Bugs.findById(id).populate('creator', 'name picture').populate('notes.creator', 'name picture')
+    const bug = await dbContext.Bugs.findById(id).populate('creator', 'name picture')
     return bug
   }
 
@@ -22,7 +22,7 @@ class BugsService {
 
   async createBug(bugData) {
     const bug = await dbContext.Bugs.create(bugData)
-    await bug.populate('creator')
+    await bug.populate('creator', 'name picture').execPopulate()
     return bug
   }
 
