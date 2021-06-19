@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+    <router-link class="navbar-brand d-flex" :to="{ name: 'Bugs' }">
       <div class="d-flex flex-column align-items-center">
         <img
           alt="logo"
@@ -9,73 +9,49 @@
         />
       </div>
     </router-link>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarText"
-      aria-controls="navbarText"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon" />
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" title="Report a Bug">
+      Report Bug
     </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <router-link :to="{ name: 'Home' }" class="nav-link">
-            Home
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link :to="{ name: 'About' }" class="nav-link">
-            About
-          </router-link>
-        </li>
-      </ul>
-      <span class="navbar-text">
-        <button
-          class="btn btn-outline-primary text-uppercase"
-          @click="login"
-          v-if="!user.isAuthenticated"
-        >
-          Login
-        </button>
-
-        <div class="dropdown" v-else>
-          <div
-            class="dropdown-toggle"
-            @click="state.dropOpen = !state.dropOpen"
-          >
-            <img
-              :src="user.picture"
-              alt="user photo"
-              height="40"
-              class="rounded"
-            />
-            <span class="mx-3">{{ user.name }}</span>
-          </div>
-          <div
-            class="dropdown-menu p-0 list-group w-100"
-            :class="{ show: state.dropOpen }"
-            @click="state.dropOpen = false"
-          >
-            <router-link :to="{ name: 'Account' }">
-              <div class="list-group-item list-group-item-action hoverable">
-                Account
-              </div>
-            </router-link>
-            <div
-              class="list-group-item list-group-item-action hoverable"
-              @click="logout"
-            >
-              logout
-            </div>
-          </div>
-        </div>
-      </span>
-    </div>
   </nav>
+
+  <!-- Modal -->
+  <div class="modal fade"
+       id="exampleModalCenter"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="exampleModalCenterTitle"
+       aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">
+            <strong>Report New Bug</strong>
+          </h5>
+        </div>
+        <div class="modal-body">
+          <form @submit.prevent="createNewBug">
+            <div class="d-flex flex-column">
+              <label for="title">Title</label>
+              <input v-model="state.newBug.title" type="text">
+            </div>
+            <div class="d-flex flex-column">
+              <label for="Description">Description</label>
+              <textarea v-model="state.newBug.description" rows="10"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">
+            Save changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -86,7 +62,7 @@ export default {
   name: 'Navbar',
   setup() {
     const state = reactive({
-      dropOpen: false
+      newBug: {}
     })
     return {
       state,
@@ -103,15 +79,6 @@ export default {
 </script>
 
 <style scoped>
-.dropdown-menu {
-  user-select: none;
-  display: block;
-  transform: scale(0);
-  transition: all 0.15s linear;
-}
-.dropdown-menu.show {
-  transform: scale(1);
-}
 .hoverable {
   cursor: pointer;
 }
@@ -123,5 +90,8 @@ a:hover {
 }
 .nav-item .nav-link.router-link-exact-active{
   color: var(--primary);
+}
+textarea{
+  resize: none;
 }
 </style>

@@ -8,20 +8,20 @@ function loadPage(page) {
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: loadPage('HomePage')
+    name: 'Bugs',
+    component: loadPage('BugsPage')
   },
   {
-    path: '/about',
-    name: 'About',
-    component: loadPage('AboutPage')
-  },
-  {
-    path: '/account',
-    name: 'Account',
-    component: loadPage('AccountPage'),
-    beforeEnter: authGuard
+    path: '/bug/:id',
+    name: 'BugDetails',
+    component: loadPage('BugDetailsPage')
   }
+  // {
+  //   path: '/account',
+  //   name: 'Account',
+  //   component: loadPage('AccountPage'),
+  //   beforeEnter: authGuard
+  // }
 ]
 
 export const router = createRouter({
