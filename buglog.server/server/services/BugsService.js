@@ -13,7 +13,7 @@ class BugsService {
   }
 
   async getBugsNotes(id) {
-    const note = await dbContext.Notes.find({ bugId: id }).populate('bug')
+    const note = await dbContext.Notes.find({ bug: id }).populate('creator')
     if (!note) {
       throw new BadRequest('incorrect note id (service)')
     }
