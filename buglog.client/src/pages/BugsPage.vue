@@ -1,6 +1,16 @@
 <template>
-  <div class="container">
-    <Bug v-for="b in state.bugs" :key="b.id" :bug="b" />
+  <div class="container titlepos">
+    <div class="row pt-3 pl-2">
+      <h1>
+        Current Bugs
+      </h1>
+    </div>
+    <div class=" d-none d-md-block container border border-dark allBugContainer">
+      <Bug v-for="b in state.bugs" :key="b.id" :bug="b" />
+    </div>
+    <div class=" d-block d-md-none row">
+      <BugMobile v-for="b in state.bugs" :key="b.id" :bug="b" />
+    </div>
   </div>
 </template>
 
@@ -31,4 +41,14 @@ export default {
 </script>
 
 <style>
+.allBugContainer{
+  height: 60vh;
+  overflow-y:scroll;
+  max-width: 800px;
+
+}
+
+.titlepos{
+  max-width: 800px;
+}
 </style>

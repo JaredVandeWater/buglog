@@ -1,23 +1,56 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Bugs' }">
-      <div class="d-flex flex-column align-items-center">
-        <img
-          alt="logo"
-          src="../assets/img/cw-logo.png"
-          height="45"
-        />
+  <nav class="bg-primary">
+    <div class="d-flex align-items-center justify-content-md-between py-1">
+      <router-link class=" d-flex" :to="{ name: 'Bugs' }">
+        <div>
+          <img
+            class="d-md-block d-none pl-3"
+            alt="logo"
+            src="../assets/img/bugIcon.png"
+            height="45"
+          />
+        </div>
+      </router-link>
+      <div class="d-none d-md-block">
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#bugCreator" title="Report a Bug">
+          Report Bug
+        </button>
+        <button v-if="!user.isAuthenticated" @click="login" title="Sign In" class="m-sm-2 m-0 my-2 btn btn-sm btn-primary">
+          Sign In
+        </button>
+        <button v-if="user.isAuthenticated" @click="logout" title="Sign Out" class="m-sm-2 m-0 my-2 btn btn-sm btn-primary">
+          Sign Out
+        </button>
       </div>
-    </router-link>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bugCreator" title="Report a Bug">
-      Report Bug
-    </button>
-    <button v-if="!user.isAuthenticated" @click="login" title="Sign Out" class="myButton2 m-4 pos-ab">
-      Sign In
-    </button>
-    <button v-if="user.isAuthenticated" @click="logout" title="Sign Out" class="myButton2 m-4 pos-ab">
-      Sign Out
-    </button>
+    </div>
+    <div class="d-flex d-block d-md-none justify-content-between">
+      <button type="button" class="m-2 btn btn-primary btn-sm" data-toggle="modal" data-target="#bugCreator" title="Report a Bug">
+        Report Bug
+      </button>
+      <router-link class=" d-flex" :to="{ name: 'Bugs' }">
+        <div>
+          <img
+            class="d-sm-block d-md-none d-none"
+            alt="logo"
+            src="../assets/img/bugIcon.png"
+            height="45"
+          />
+          <img
+            class="d-block d-sm-none"
+            alt="logo"
+            src="../assets/img/bugIconsmall.png"
+            height="45"
+          />
+        </div>
+      </router-link>
+
+      <button v-if="!user.isAuthenticated" @click="login" title="Sign In" class="m-2 btn btn-sm btn-primary">
+        Sign In
+      </button>
+      <button v-if="user.isAuthenticated" @click="logout" title="Sign Out" class="m-2 btn btn-sm btn-primary">
+        Sign Out
+      </button>
+    </div>
   </nav>
 
   <!-- Modal -->
@@ -39,11 +72,11 @@
           <div class="modal-body">
             <div class="d-flex flex-column">
               <label for="title">Title</label>
-              <input v-model="state.newBug.title" type="text">
+              <input v-model="state.newBug.title" type="text" required maxlength="25">
             </div>
             <div class="d-flex flex-column">
               <label for="Description">Description</label>
-              <textarea v-model="state.newBug.description" rows="10"></textarea>
+              <textarea v-model="state.newBug.description" rows="7" required></textarea>
             </div>
           </div>
           <div class="modal-footer">

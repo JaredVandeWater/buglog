@@ -1,18 +1,20 @@
 <template>
   <div @click="openBug" class="row singlebug pb-1">
-    <div class="col-5 d-flex justify-content-start wrapper">
-      {{ bug.title }}
-    </div>
-    <div class="col-2 d-flex justify-content-start wrapper">
-      {{ bug.creator.name.split('@')[0] }}
-    </div>
-    <div class="col-3 d-flex justify-content-start" :class="bug.closed ? 'text-danger' : 'text-success'">
-      <p class="m-0">
-        {{ closedChanger(bug.closed) }}
-      </p>
-    </div>
-    <div class="col-2 d-flex justify-content-end">
-      {{ timeFixer(bug.updatedAt) }}
+    <div class="card w-100">
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ bug.title }}
+        </h5>
+        <div class="d-flex justify-content-between">
+          <h6 :class="bug.closed ? 'text-danger' : 'text-success'">
+            {{ closedChanger(bug.closed) }}
+          </h6>
+          {{ timeFixer(bug.updatedAt) }}
+        </div>
+        <p>
+          {{ bug.creator.name.split('@')[0] }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -57,7 +59,6 @@ export default {
 
 <style>
 .singlebug{
-  min-width: 300px;
   cursor: pointer;
 
 }
