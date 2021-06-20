@@ -88,7 +88,7 @@
               Cancel
             </button>
             <button type="submit" class="btn btn-primary">
-              Save changes
+              Create
             </button>
           </div>
         </form>

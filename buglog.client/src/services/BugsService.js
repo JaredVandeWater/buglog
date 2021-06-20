@@ -27,5 +27,10 @@ class BugsService {
     await api.delete(`api/bugs/${id}`)
     this.getAllBugs()
   }
+
+  async updateBug(bugData, id) {
+    const res = await api.put(`/bug/${id}`, bugData)
+    AppState.currentBug = res.data
+  }
 }
 export const bugsService = new BugsService()
