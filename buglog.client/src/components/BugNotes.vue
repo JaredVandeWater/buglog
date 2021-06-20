@@ -1,4 +1,9 @@
 <template>
+  <div class="row">
+    <div class="col">
+      <h1>Notes</h1>
+    </div>
+  </div>
   <div class="row wrapper my-3">
     <div class="col">
       <h1>{{ state.bug.title }}</h1>
@@ -28,16 +33,13 @@
       </div>
     </div>
   </div>
-  <div v-if="state.bug.creator" class="row flex-sm-row flex-column">
-    <div class="col">
+  <div class="row">
+    <div v-if="state.bug.creator" class="col d-flex justify-content-between">
       <div>
         <small>Bug Created: {{ timeFixer(state.bug.createdAt) }}</small>
       </div>
-    </div>
-    <div v-if="!state.bug.closed" class="col d-flex justify-content-sm-end">
-      <div>
-        <small>Last Updated: {{ timeFixer(state.bug.updatedAt) }}</small>
-      </div>
+
+      <small>Last Updated: {{ timeFixer(state.bug.updatedAt) }}</small>
     </div>
   </div>
 

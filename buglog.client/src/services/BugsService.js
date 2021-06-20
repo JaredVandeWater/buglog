@@ -29,8 +29,8 @@ class BugsService {
   }
 
   async updateBug(bugData, id) {
-    const res = await api.put(`/bug/${id}`, bugData)
-    AppState.currentBug = res.data
+    await api.put(`api/bugs/${id}`, bugData)
+    this.getActiveBug(id)
   }
 }
 export const bugsService = new BugsService()

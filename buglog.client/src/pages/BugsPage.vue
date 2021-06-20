@@ -46,6 +46,7 @@ export default {
   setup() {
     onMounted(() => {
       try {
+        AppState.currentBug = {}
         bugsService.getAllBugs()
       } catch (error) {
         Notification.toast(error.message)
