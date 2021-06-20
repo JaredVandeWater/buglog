@@ -7,9 +7,11 @@
       <h2 class="mr-3">
         Reporter:
       </h2>
-      <h3>name is broke</h3>
+      <h3 v-if="state.bug.creator">
+        {{ state.bug.creator.name.split('@')[0] }}
+      </h3>
     </div>
-    <div class="col d-flex justify-content-end">
+    <div class="col-md-3 d-flex justify-content-md-end">
       <h3 class="mr-3">
         Status:
       </h3>
@@ -48,7 +50,6 @@ export default {
 }
 
 </script>
-
 <style>
 
 </style>
