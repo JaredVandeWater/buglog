@@ -4,6 +4,7 @@
       <router-link class=" d-flex" :to="{ name: 'Bugs' }">
         <div>
           <img
+            title="Bug Tracker Home"
             class="d-md-block d-none pl-3"
             alt="logo"
             src="../assets/img/bugIcon.png"
@@ -21,6 +22,7 @@
         <button v-if="user.isAuthenticated" @click="logout" title="Sign Out" class="m-sm-2 m-0 my-2 btn btn-sm btn-primary">
           Sign Out
         </button>
+        <img v-if="user.isAuthenticated" class="prof-pic rounded-circle mr-2" :src="user.picture" :alt="user.name" :title="user.name">
       </div>
     </div>
     <div class="d-flex d-block d-md-none justify-content-between">
@@ -30,12 +32,14 @@
       <router-link class=" d-flex" :to="{ name: 'Bugs' }">
         <div>
           <img
+            title="Bug Tracker Home"
             class="d-sm-block d-md-none d-none"
             alt="logo"
             src="../assets/img/bugIcon.png"
             height="45"
           />
           <img
+            title="Bug Tracker Home"
             class="d-block d-sm-none"
             alt="logo"
             src="../assets/img/bugIconsmall.png"
@@ -72,7 +76,7 @@
           <div class="modal-body">
             <div class="d-flex flex-column">
               <label for="title">Title</label>
-              <input v-model="state.newBug.title" type="text" required maxlength="25">
+              <input v-model="state.newBug.title" type="text" required maxlength="65">
             </div>
             <div class="d-flex flex-column">
               <label for="Description">Description</label>
@@ -80,7 +84,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
               Cancel
             </button>
             <button type="submit" class="btn btn-primary">

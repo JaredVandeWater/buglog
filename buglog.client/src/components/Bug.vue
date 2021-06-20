@@ -1,12 +1,12 @@
 <template>
-  <div @click="openBug" class="row singlebug pb-1">
-    <div class="col-5 d-flex justify-content-start wrapper">
+  <div @click="openBug" class="row singlebug pt-2 align-items-center">
+    <div class="col-6 d-flex justify-content-start wrapper">
       {{ bug.title }}
     </div>
-    <div class="col-2 d-flex justify-content-start wrapper">
-      {{ bug.creator.name.split('@')[0] }}
+    <div class="col-2 d-flex justify-content-center wrapper">
+      <img class="prof-pic rounded-circle" :src="bug.creator.picture" :title="bug.creator.name.split('@')[0]" :alt="bug.creator.name.split('@')[0]">
     </div>
-    <div class="col-3 d-flex justify-content-start" :class="bug.closed ? 'text-danger' : 'text-success'">
+    <div class="col-2 d-flex justify-content-center" :class="bug.closed ? 'text-danger' : 'text-success'">
       <b><p class="m-0">
         {{ closedChanger(bug.closed) }}
       </p></b>
@@ -66,5 +66,9 @@ overflow-wrap: anywhere;
 }
 .singlebug:hover{
   background-color: rgba(38, 80, 10, 0.109);
+}
+
+.prof-pic{
+  max-height: .5rem;
 }
 </style>

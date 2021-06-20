@@ -22,5 +22,10 @@ class BugsService {
     AppState.allBugs = [res.data, ...AppState.allBugs]
     return res.data.id
   }
+
+  async closeBug(id) {
+    await api.delete(`api/bugs/${id}`)
+    this.getAllBugs()
+  }
 }
 export const bugsService = new BugsService()

@@ -11,16 +11,20 @@
       </h1>
     </div>
     <div class="row d-none d-md-flex mt-3">
-      <div class="col-5 ">
+      <div class="col-6 ">
         <b>Title</b>
       </div>
-      <div class="col-2 ">
-        <b>Reporter</b>
+      <div class="col d-flex justify-content-between">
+        <div class="mx-2">
+          <b>Reporter</b>
+        </div>
+        <div class="mx-2">
+          <b>Status</b>
+        </div>
+        <div class="mx-2">
+          <b>Last Updated</b>
+        </div>
       </div>
-      <div class="col-3">
-        <b>Status</b>
-      </div>
-      <b>Last Updated</b>
     </div>
     <div class=" d-none d-md-block container border border-dark allBugContainer">
       <Bug v-for="b in state.bugs" :key="b.id" :bug="b" />
