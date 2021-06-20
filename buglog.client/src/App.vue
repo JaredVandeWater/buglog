@@ -5,11 +5,6 @@
   <main>
     <router-view />
   </main>
-  <footer>
-    <div class=" text-dark text-center pt-4 pb-1">
-      Jared
-    </div>
-  </footer>
 </template>
 
 <script>

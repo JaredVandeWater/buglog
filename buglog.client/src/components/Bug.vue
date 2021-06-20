@@ -7,9 +7,9 @@
       {{ bug.creator.name.split('@')[0] }}
     </div>
     <div class="col-3 d-flex justify-content-start" :class="bug.closed ? 'text-danger' : 'text-success'">
-      <p class="m-0">
+      <b><p class="m-0">
         {{ closedChanger(bug.closed) }}
-      </p>
+      </p></b>
     </div>
     <div class="col-2 d-flex justify-content-end">
       {{ timeFixer(bug.updatedAt) }}
@@ -65,6 +65,6 @@ export default {
 overflow-wrap: anywhere;
 }
 .singlebug:hover{
-  background-color: rgba(0, 0, 0, 0.13);
+  background-color: rgba(38, 80, 10, 0.109);
 }
 </style>

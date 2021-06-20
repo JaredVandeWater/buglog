@@ -1,6 +1,6 @@
 <template>
-  <nav class="bg-primary">
-    <div class="d-flex align-items-center justify-content-md-between py-1">
+  <nav class="bg-primary sticky-top">
+    <div class="d-flex align-items-center justify-content-md-between py-1 ">
       <router-link class=" d-flex" :to="{ name: 'Bugs' }">
         <div>
           <img
@@ -133,6 +133,7 @@ export default {
 </script>
 
 <style scoped>
+
 .hoverable {
   cursor: pointer;
 }

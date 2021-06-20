@@ -1,16 +1,26 @@
 <template>
-  <div @click="openBug" class="row singlebug pb-1">
-    <div class="card w-100">
-      <div class="card-body">
-        <h5 class="card-title">
+  <div @click="openBug" class="row  pb-1 justify-content-center">
+    <div class="card my-w shadow singlebug2">
+      <div class="card-header p-1">
+        <h5 class="m-1">
           {{ bug.title }}
         </h5>
-        <div class="d-flex justify-content-between">
-          <h6 :class="bug.closed ? 'text-danger' : 'text-success'">
+      </div>
+      <div class="card-body">
+        <div class="d-flex">
+          <p class="ml-2">
+            <strong>Status:</strong>
+          </p>
+          <b><p class="ml-2" :class="bug.closed ? 'text-danger' : 'text-success'">
             {{ closedChanger(bug.closed) }}
-          </h6>
+          </p></b>
+        </div>
+        <div class="d-flex">
+          <strong><p class="m-0 mx-2">Last Updated:</p></strong>
           {{ timeFixer(bug.updatedAt) }}
         </div>
+      </div>
+      <div class="card-footer d-flex justify-content-end p-0 px-3">
         <p>
           {{ bug.creator.name.split('@')[0] }}
         </p>
@@ -58,14 +68,17 @@ export default {
 </script>
 
 <style>
-.singlebug{
+.my-w{
+  width: 85vw;
+}
+.singlebug2{
   cursor: pointer;
 
 }
 .wrapper{
 overflow-wrap: anywhere;
 }
-.singlebug:hover{
-  background-color: rgba(0, 0, 0, 0.13);
+.singlebug2:hover{
+  background-color: rgba(106, 182, 55, 0.048);
 }
 </style>

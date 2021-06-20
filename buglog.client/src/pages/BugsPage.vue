@@ -1,14 +1,32 @@
 <template>
   <div class="container titlepos">
-    <div class="row pt-3 pl-2">
+    <div class="row d-none d-md-block pt-3 pl-2 ">
       <h1>
         Current Bugs
       </h1>
     </div>
+    <div class=" d-block d-md-none  pt-3 pl-2 row my-b">
+      <h1 class="d-flex justify-content-center">
+        Current Bugs
+      </h1>
+    </div>
+    <div class="row d-none d-md-flex mt-3">
+      <div class="col-5 ">
+        <b>Title</b>
+      </div>
+      <div class="col-2 ">
+        <b>Reporter</b>
+      </div>
+      <div class="col-3">
+        <b>Status</b>
+      </div>
+      <b>Last Updated</b>
+    </div>
     <div class=" d-none d-md-block container border border-dark allBugContainer">
       <Bug v-for="b in state.bugs" :key="b.id" :bug="b" />
     </div>
-    <div class=" d-block d-md-none row">
+    <div class=" d-block d-md-none row allBugContainer2 ">
+      <div class="p-1"></div>
       <BugMobile v-for="b in state.bugs" :key="b.id" :bug="b" />
     </div>
   </div>
@@ -41,13 +59,23 @@ export default {
 </script>
 
 <style>
+.my-b{
+
+  border-bottom: 2px solid rgba(0, 0, 0, 0.103);
+}
 .allBugContainer{
-  height: 60vh;
+  height: 70vh;
   overflow-y:scroll;
   max-width: 800px;
 
 }
+.allBugContainer2{
+  max-height: 75vh;
+  overflow-y:scroll;
+  max-width: 800px;
+  overflow-x: hidden;
 
+}
 .titlepos{
   max-width: 800px;
 }
