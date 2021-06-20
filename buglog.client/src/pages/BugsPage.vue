@@ -38,7 +38,7 @@ import Notification from '../utils/Notification'
 import { AppState } from '../AppState'
 import { bugsService } from '../services/BugsService'
 export default {
-  name: 'Bugs',
+  name: 'BugsPage',
   setup() {
     onMounted(() => {
       try {
