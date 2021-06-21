@@ -20,10 +20,8 @@
           {{ timeFixer(bug.updatedAt) }}
         </div>
       </div>
-      <div class="card-footer d-flex justify-content-end p-0 px-3">
-        <p>
-          {{ bug.creator.name.split('@')[0] }}
-        </p>
+      <div class="card-footer d-flex justify-content-end p-0 px-3 py-1">
+        <img class="prof-pic rounded-circle mx-2" :title="bug.creator.name" :src=" bug.creator.picture" :alt="bug.creator.name">
       </div>
     </div>
   </div>
@@ -80,5 +78,8 @@ overflow-wrap: anywhere;
 }
 .singlebug2:hover{
   background-color: rgba(106, 182, 55, 0.048);
+}
+.prof-pic{
+  max-height: 2rem;
 }
 </style>
