@@ -18,9 +18,11 @@
         <div class="mx-2">
           <b>Reporter</b>
         </div>
-        <div class="mx-2">
-          <b>Status</b>
-        </div>
+        <button @click="sortStatus" class="btn p-0">
+          <div class="mx-2">
+            <b>Status</b><i class="mdi mdi-arrow-up-down-bold"></i>
+          </div>
+        </button>
         <div class="mx-2">
           <b>Last Updated</b>
         </div>
@@ -37,14 +39,14 @@
 </template>
 
 <script>
-import { computed, onMounted, reactive } from '@vue/runtime-core'
+import { computed, onMounted, reactive, watchEffect } from '@vue/runtime-core'
 import Notification from '../utils/Notification'
 import { AppState } from '../AppState'
 import { bugsService } from '../services/BugsService'
 export default {
   name: 'BugsPage',
   setup() {
-    onMounted(() => {
+    watchEffect(() => {
       try {
         AppState.currentBug = {}
         bugsService.getAllBugs()
@@ -52,11 +54,28 @@ export default {
         Notification.toast(error.message)
       }
     })
+
     const state = reactive({
-      bugs: computed(() => AppState.allBugs)
+      bugs: computed(() => AppState.allBugs),
+      bugSort: 0
     })
     return {
-      state
+      state,
+      async sortStatus() {
+        state.bugSort++
+        if (state.bugSort === 1) {
+          await bugsService.getAllBugs()
+          AppState.allBugs = state.bugs.filter(b => b.closed)
+        }
+        if (state.bugSort === 2) {
+          await bugsService.getAllBugs()
+          AppState.allBugs = state.bugs.filter(b => !b.closed)
+        }
+        if (state.bugSort > 2) {
+          await bugsService.getAllBugs()
+          state.bugSort = 0
+        }
+      }
     }
   }
 }
