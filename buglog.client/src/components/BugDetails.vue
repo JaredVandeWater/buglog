@@ -10,7 +10,7 @@
       <h3>
         Reporter:
       </h3>
-      <img class="prof-pic rounded-circle mx-2" :src=" state.bug.creator.picture" alt="">
+      <img class="prof-pic rounded-circle mx-2" :title="state.bug.creator.name" :src=" state.bug.creator.picture" :alt="state.bug.creator.name">
       <h5 class="d-none d-sm-block" v-if="state.bug.creator">
         {{ state.bug.creator.name.split('@')[0] }}
       </h5>

@@ -10,7 +10,7 @@
         Current Bugs
       </h1>
     </div>
-    <div class="row d-none d-md-flex mt-3">
+    <div class="row d-none d-md-flex mt-3 mb-1">
       <div class="col-6 ">
         <b>Title</b>
       </div>
@@ -18,7 +18,7 @@
         <div class="mx-2">
           <b>Reporter</b>
         </div>
-        <button @click="sortStatus" class="btn p-0">
+        <button @click="sortStatus" title="Filter Status" class="btn p-0">
           <div class="mx-2">
             <b>Status</b><i class="mdi mdi-arrow-up-down-bold"></i>
           </div>
@@ -62,18 +62,22 @@ export default {
     return {
       state,
       async sortStatus() {
-        state.bugSort++
-        if (state.bugSort === 1) {
-          await bugsService.getAllBugs()
-          AppState.allBugs = state.bugs.filter(b => b.closed)
-        }
-        if (state.bugSort === 2) {
-          await bugsService.getAllBugs()
-          AppState.allBugs = state.bugs.filter(b => !b.closed)
-        }
-        if (state.bugSort > 2) {
-          await bugsService.getAllBugs()
-          state.bugSort = 0
+        try {
+          state.bugSort++
+          if (state.bugSort === 1) {
+            await bugsService.getAllBugs()
+            AppState.allBugs = state.bugs.filter(b => b.closed)
+          }
+          if (state.bugSort === 2) {
+            await bugsService.getAllBugs()
+            AppState.allBugs = state.bugs.filter(b => !b.closed)
+          }
+          if (state.bugSort > 2) {
+            await bugsService.getAllBugs()
+            state.bugSort = 0
+          }
+        } catch (error) {
+          Notification.toast(error, 'error')
         }
       }
     }

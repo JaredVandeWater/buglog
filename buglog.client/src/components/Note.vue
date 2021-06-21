@@ -1,7 +1,7 @@
 <template>
   <div v-if="note.creator" class="row m-1 rel" :class="getnoteI() ? 'notecolor' : '' ">
     <div>
-      <button @click="deleteNote" v-if="state.account.id === note.creator.id" class="btn text-danger r-corner">
+      <button @click="deleteNote" v-if="state.account.id === note.creator.id" title="Delete Note" class="btn text-danger r-corner">
         <i class="mdi mdi-delete mdi-24px text-danger"></i>
       </button>
     </div>

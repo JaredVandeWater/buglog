@@ -1,5 +1,5 @@
 <template>
-  <div @click="openBug" class="row singlebug pt-2 align-items-center">
+  <div @click="openBug" title="Bug Details" class="row singlebug pt-2 align-items-center">
     <div class="col-6 d-flex justify-content-start wrapper">
       {{ bug.title }}
     </div>
@@ -19,6 +19,7 @@
 
 <script>
 import { useRouter } from 'vue-router'
+import { AppState } from '../AppState'
 import Notification from '../utils/Notification'
 export default {
   props: {
@@ -44,6 +45,7 @@ export default {
 
       async openBug() {
         try {
+          AppState.currentNotes = []
           await router.push(`/bug/${props.bug.id}`)
         } catch (error) {
           Notification.toast(error, 'error')

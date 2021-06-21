@@ -1,5 +1,5 @@
 <template>
-  <div @click="openBug" class="row  pb-1 justify-content-center">
+  <div @click="openBug" title="Bug Details" class="row  pb-1 justify-content-center">
     <div class="card my-w shadow singlebug2">
       <div class="card-header p-1">
         <h5 class="m-1">
