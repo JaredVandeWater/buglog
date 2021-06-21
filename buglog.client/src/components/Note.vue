@@ -7,10 +7,12 @@
     </div>
     <div class="col-3 m-2">
       <div class="d-flex">
-        <img class="prof-pic rounded-circle" :src="note.creator.picture" :alt="note.creator.name" :title="note.creator.name">
-        <b><p class="mx-2 ">{{ note.creator.name.split('@')[0] }}</p></b>
+        <img class="prof-pic rounded-circle " :src="note.creator.picture" :alt="note.creator.name" :title="note.creator.name">
+        <b><p class="mx-2 d-none d-md-block wrapper">{{ note.creator.name.split('@')[0] }}</p></b>
       </div>
-      <h6>{{ timeFixer(note.updatedAt) }}</h6>
+      <div class="mt-2">
+        <h6>{{ timeFixer(note.updatedAt) }}</h6>
+      </div>
     </div>
     <div class="col d-flex align-items-center wrapper p-0 ml-3 mr-5 my-3">
       <p>{{ note.body }}</p>
