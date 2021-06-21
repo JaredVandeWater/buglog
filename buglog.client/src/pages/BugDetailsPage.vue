@@ -6,7 +6,8 @@
         <h1>Notes</h1>
       </div>
     </div>
-    <BugNotes v-for="n in state.notes" :key="n.id" :note="n" />
+    <Note v-for="n in state.notes" :key="n.id" :note="n" />
+    <hr>
     <div v-if="state.user.isAuthenticated && !state.bug.closed" class="row py-2">
       <div class="col d-flex justify-content-end">
         <button

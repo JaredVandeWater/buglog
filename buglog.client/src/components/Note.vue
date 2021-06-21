@@ -1,19 +1,19 @@
 <template>
-  <div v-if="note.creator" class="row m-1" :class="getnoteI() ? 'notecolor' : '' ">
-    <div class="col-2 m-2">
+  <div v-if="note.creator" class="row m-1 rel" :class="getnoteI() ? 'notecolor' : '' ">
+    <div>
+      <button @click="deleteNote" v-if="state.account.id === note.creator.id" class="btn text-danger r-corner">
+        <i class="mdi mdi-delete mdi-24px text-danger"></i>
+      </button>
+    </div>
+    <div class="col-3 m-2">
       <div class="d-flex">
         <img class="prof-pic rounded-circle" :src="note.creator.picture" :alt="note.creator.name" :title="note.creator.name">
-        <b><p class="mx-2">{{ note.creator.name.split('@')[0] }}</p></b>
+        <b><p class="mx-2 ">{{ note.creator.name.split('@')[0] }}</p></b>
       </div>
       <h6>{{ timeFixer(note.updatedAt) }}</h6>
     </div>
-    <div class="col d-flex align-items-center">
+    <div class="col d-flex align-items-center wrapper p-0 ml-3 mr-5 my-3">
       <p>{{ note.body }}</p>
-    </div>
-    <div class="col-1">
-      <button @click="deleteNote" v-if="state.account.id === note.creator.id" class="btn btn-sm btn-danger">
-        Delete
-      </button>
     </div>
   </div>
 </template>
@@ -121,5 +121,15 @@ export default {
 }
 .wrapper{
  overflow-wrap: anywhere;
+}
+
+.rel{
+  position: relative;
+}
+.r-corner{
+  z-index: 1;
+  position: absolute;
+  top: 0.1px;
+  right: 0.1px;
 }
 </style>
