@@ -13,20 +13,32 @@
         </div>
       </router-link>
       <div class="d-none d-md-block">
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#bugCreator" title="Report a Bug">
+        <button v-if="state.user.isAuthenticated"
+                type="button"
+                class="btn btn-primary btn-sm"
+                data-toggle="modal"
+                data-target="#bugCreator"
+                title="Report a Bug"
+        >
           Report Bug
         </button>
-        <button v-if="!user.isAuthenticated" @click="login" title="Sign In" class="m-sm-2 m-0 my-2 btn btn-sm btn-primary">
+        <button v-if="!state.user.isAuthenticated" @click="login" title="Sign In" class="m-sm-2 m-0 my-2 btn btn-sm btn-primary">
           Sign In
         </button>
-        <button v-if="user.isAuthenticated" @click="logout" title="Sign Out" class="m-sm-2 m-0 my-2 btn btn-sm btn-primary">
+        <button v-if="state.user.isAuthenticated" @click="logout" title="Sign Out" class="m-sm-2 m-0 my-2 btn btn-sm btn-primary">
           Sign Out
         </button>
-        <img v-if="user.isAuthenticated" class="prof-pic rounded-circle mr-2" :src="user.picture" :alt="user.name" :title="user.name">
+        <img v-if="state.user.isAuthenticated" class="prof-pic rounded-circle mr-2" :src="state.user.picture" :alt="state.user.name" :title="state.user.name">
       </div>
     </div>
     <div class="d-flex d-block d-md-none justify-content-between">
-      <button type="button" class="m-2 btn btn-primary btn-sm" data-toggle="modal" data-target="#bugCreator" title="Report a Bug">
+      <button v-if="state.user.isAuthenticated"
+              type="button"
+              class="m-2 btn btn-primary btn-sm"
+              data-toggle="modal"
+              data-target="#bugCreator"
+              title="Report a Bug"
+      >
         Report Bug
       </button>
       <router-link class=" d-flex" :to="{ name: 'Bugs' }">
@@ -48,10 +60,10 @@
         </div>
       </router-link>
 
-      <button v-if="!user.isAuthenticated" @click="login" title="Sign In" class="m-2 btn btn-sm btn-primary">
+      <button v-if="!state.user.isAuthenticated" @click="login" title="Sign In" class="m-2 btn btn-sm btn-primary">
         Sign In
       </button>
-      <button v-if="user.isAuthenticated" @click="logout" title="Sign Out" class="m-2 btn btn-sm btn-primary">
+      <button v-if="state.user.isAuthenticated" @click="logout" title="Sign Out" class="m-2 btn btn-sm btn-primary">
         Sign Out
       </button>
     </div>
@@ -110,11 +122,11 @@ export default {
   setup() {
     const router = useRouter()
     const state = reactive({
+      user: computed(() => AppState.user),
       newBug: {}
     })
     return {
       state,
-      user: computed(() => AppState.user),
       async login() {
         AuthService.loginWithPopup()
       },

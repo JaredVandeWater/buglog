@@ -43,7 +43,7 @@
 
   <div class="row mx-2 mx-sm-0 mt-3">
     <div class="col border border-dark">
-      <p class="m-3">
+      <p class="m-3 wrapper">
         {{ state.bug.description }}
       </p>
     </div>
